@@ -1,4 +1,6 @@
 import csv
+import os
+
 import requests
 
 
@@ -20,7 +22,7 @@ def make_cities(filename):
 
 
 def fetch_charging_stations(latitude, longitude, distance=100):
-    api_key = 'e00cb487-943f-4208-a607-8a5594f63524'  # key that i got after sign up
+    api_key = os.environ.get("OCM_API_KEY")  # free key from openchargemap.org
     """
     Fetch EV charging stations using Open Charge Map API.
     
@@ -69,7 +71,7 @@ def write_to_csv(charging_stations, filename="charging_stations.csv"):
 
 
 def remove_duplicates():
-    filename = "/Users/elieh/PycharmProjects/pythonProject4/first_charging_stations.csv"
+    filename = "first_charging_stations.csv"
     dic_stations = {}  # Dictionnary of all the stations name
 
     with open(filename, mode='r', newline='', encoding='utf-8') as file:
